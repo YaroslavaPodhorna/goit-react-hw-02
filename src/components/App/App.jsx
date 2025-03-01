@@ -5,10 +5,11 @@ import Feedback from "../Feedback/Feedback";
 import Notification from "../Notification/Notification";
 import css from "./App.module.css";
 export default function App() {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [feedback, setFeedback] = useState(() => {
+    const savedFeedback = localStorage.getItem("feedback");
+    return savedFeedback
+      ? JSON.parse(savedFeedback)
+      : { good: 0, neutral: 0, bad: 0 };
   });
 
   useEffect(() => {
